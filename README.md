@@ -2,6 +2,7 @@
 
 This chatbot is built using an Agentic RAG approach and FastAPI. It leverages the Mixtral-8x7B model with Chroma database and incorporates three tools corresponding to different RAG implementations: FAQ queries, product details queries, and occupation-based insurance product queries.
 
+\* The Mixtral-8x7B model is free to run. You may improve the overal performance of the agent using a more powerful LLM such as GPT 3.5 or later.
 
 <table>
   <tr>
