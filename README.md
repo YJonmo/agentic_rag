@@ -7,11 +7,11 @@ This chatbot is built using an Agentic RAG approach and FastAPI. It leverages th
   <tr>
     <td>
       <p>Diagram</p>
-      <img src="./assets/diagram.jpg" alt="Agent Architecture Diagram" width="800" height="300">
+      <img src="./assets/diagram.jpg" alt="Agent Architecture Diagram" width="800" height="220">
     </td>
     <td>
       <p>Sample run demo</p>
-      <img src="./assets/chat_screen.jpg" width="400" height="300" alt="Watch the video">
+      <img src="./assets/chat_screen.jpg" width="400" height="220" alt="Watch the video">
     </td>
   </tr>
 </table>
