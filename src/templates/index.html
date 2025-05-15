@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LangChain Chatbot</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+        }
+        #chat-container { 
+            width: 650px; 
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: white;
+            padding: 20px;
+        }
+        #chat-history { 
+            height: 300px; 
+            overflow-y: scroll;
+            border-bottom: 2px solid #e4e6eb;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        #user-input { 
+            width: 95%;
+            padding: 12px;
+            border: 1px solid #e4e6eb;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+        #send-button { 
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #0084ff;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #send-button:hover {
+            background-color: #0066cc;
+        }
+        .user-message { 
+            text-align: right;
+            margin-bottom: 10px;
+            background-color: #0084ff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 18px;
+            display: inline-block;
+            float: right;
+            clear: both;
+            max-width: 70%;
+        }
+        .bot-message { 
+            text-align: left;
+            margin-bottom: 10px;
+            background-color: #e4e6eb;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 18px;
+            display: inline-block;
+            float: left;
+            clear: both;
+            max-width: 70%;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-history"></div>
+        <!-- <img id="image-preview" alt="Preview"> -->
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <!-- <input type="file" id="file-input" style="margin-top: 10px;" accept="image/*"> -->
+        <button id="send-button" onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            // const preview = document.getElementById('image-preview');
+            const file = e.target.files[0];
+            if (file) {
+                preview.style.display = 'block';
+                preview.src = URL.createObjectURL(file);
+            }
+        });
+
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input");
+            const fileInput = document.getElementById("file-input");
+            const chatHistory = document.getElementById("chat-history");
+            // const preview = document.getElementById('image-preview');
+
+            if (!chatHistory || !userInput) {
+                console.error("Required elements not found");
+                return;
+            }
+
+            if (!userInput.value && (!fileInput || !fileInput.files[0])) return;
+
+            if (fileInput && fileInput.files[0]) {
+                const formData = new FormData();
+                formData.append('file', fileInput.files[0]);
+                
+                const sanitizedFileName = fileInput.files[0].name.replace(/[<>]/g, '');
+            }
+
+            if (userInput.value) {
+                const sanitizedInput = userInput.value.replace(/[<>]/g, '');
+                chatHistory.innerHTML += `<div class="user-message">You: ${sanitizedInput}</div>`;
+                userInput.value = "";
+
+                try {
+                    const response = await fetch("/chat/", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ message: sanitizedInput })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    const sanitizedResponse = data.response.replace(/[<>]/g, '');
+                    chatHistory.innerHTML += `<div class="bot-message">AI Agent: ${sanitizedResponse}</div>`;
+                } catch (error) {
+                    console.error("Error:", error);
+                    chatHistory.innerHTML += `<div class="bot-message">AI Agent: Sorry, there was an error processing your request.</div>`;
+                }
+            }
+
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        document.getElementById("user-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
