@@ -7,8 +7,8 @@ from utils import embeddings, text_splitter, concatenator
 from data_classes import FAQ, ProductDetails, OccupationDetails
 from config import persistent_directory, faq_file, prod_occu_file
 
-load_dotenv(".env") # make sure the API keys are loaded correctly
-if not os.getenv("OPENAI_API_KEY") or not os.getenv("LANGSMITH_API_KEY"):
+load_dotenv( ".env") # make sure the API keys are loaded correctly
+if not os.getenv("LANGSMITH_API_KEY"):
     raise Exception("Environment variables not loaded. Check .env in the project root exist and contains the API keys.")
 
 

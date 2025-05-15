@@ -25,3 +25,5 @@ CMD python src/db_creator.py && \
     pytest && \
     uvicorn src.agent:app --host 0.0.0.0 --port 8000 --reload
 
+# To run in interactive mode use:
+# docker run -e NVIDIA_API_KEY="your-nvidia-api-key" -it --rm -p 8000:8000 agentic_rag /bin/bash

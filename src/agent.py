@@ -16,6 +16,9 @@ from .utils import embeddings, get_retriever
 from .config import persistent_directory
 
 load_dotenv()
+load_dotenv(".env") # make sure the API keys are loaded correctly
+if not os.getenv("LANGSMITH_API_KEY") or not os.getenv("LANGSMITH_API_KEY"):
+    raise Exception("Environment variables not loaded. Check .env in the project root exist and contains the API keys.")
 
 app = FastAPI()
 

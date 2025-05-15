@@ -87,8 +87,8 @@ pip install -r requirements.txt
 
 3. Get an API key from [Nvidia website](https://build.nvidia.com/mistralai/mixtral-8x7b-instruct?snippet_tab=Python&signin=true&api_key=true) and an API key for [LangSmith](https://docs.smith.langchain.com/administration/how_to_guides/organization_management/create_account_api_key) and place them in your .env file using the following commands:
 ```bash
-echo NVIDIA_API_KEY="your-nvidia-api-key-here" >> .env
-echo LANGSMITH_API_KEY="your-langsmith-key-here" >> .env
+echo NVIDIA_API_KEY="your-nvidia-api-key" >> .env
+echo LANGSMITH_API_KEY="your-langsmith-key" >> .env
 ```
 
 4. Run the following file to create a vector DB from the JSON and the CSV files in the data/raw folde:
@@ -122,5 +122,5 @@ docker build -t agentic_rag .
 
 2. Run the docker image:
 ```bash
-docker run -p 8000:8000 agentic_rag
+docker run -e NVIDIA_API_KEY="your-nvidia-api-key" -p 8000:8000 agentic_rag
 ```
