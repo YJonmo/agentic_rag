@@ -1,4 +1,4 @@
-# Chatbot example with Agent RAG for an insurance company
+# Chatbot example with Agentic RAG for an insurance company
 
 This chatbot is built using an Agentic RAG approach and FastAPI. It leverages the Mixtral-8x7B model with Chroma database and incorporates three tools corresponding to different RAG implementations: FAQ queries, product details queries, and occupation-based insurance product queries.
 
