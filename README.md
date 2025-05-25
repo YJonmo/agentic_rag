@@ -43,11 +43,9 @@ project_root/
 ├── assets/
 │   ├── chat_screen.webm
 │   └── diagram.jpg   
-│     
 ├── data/
 │   ├── raw:JSON, CSV
 │   └── vector: ChormaDB
-│
 ├── src/
 │   ├── __init__.py
 │   ├── agent.py
@@ -61,7 +59,6 @@ project_root/
 │── tests/
 │   ├── __init__.py
 │   └── test_rag.py      
-│
 ├── README.md
 ├── Dockerfile
 └── requirements.txt
